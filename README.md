@@ -15,8 +15,8 @@ KrishiSetu is a comprehensive MERN-stack Agri-Marketplace designed to directly c
 ## 🛠️ Tech Stack
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB, Mongoose (ODM)
+- **Authentication:** JWT (jsonwebtoken), Twilio SMS *(Upcoming)*
 - **Frontend:** React.js *(Upcoming)*
-- **Authentication:** JWT, Twilio SMS *(Upcoming)*
 - **Real-Time:** Socket.io *(Upcoming)*
 
 ## 📂 Backend Architecture
@@ -37,16 +37,26 @@ backend/
 
 ## 🏗️ Database Models Built (Phase 1)
 The application leverages advanced NoSQL concepts including **Polymorphic References (`refPath`)**, **TTL Indexes**, and **Compound Indexes** across the following models:
-1. `Admin` - Platform administrators (Email/Password Auth)
-2. `Farmer` - Sellers listing crops (Mobile OTP Auth)
-3. `Trader` - Verified buyers placing bids (Mobile OTP Auth)
-4. `Crop` - Inventory listings linked to Farmers
-5. `Bid` - Junction document recording negotiations between Traders and Farmers
-6. `OTP` - Self-destructing secure tokens using MongoDB TTL
-7. `Message` - Chat system using double polymorphic references
-8. `Notification` - Event-driven inbox system
-9. `Report` - Trust & Safety moderation workflow
-10. `Review` - Reputation rating system preventing duplicate spam
+
+| Model | Purpose |
+|---|---|
+| `Admin` | Platform administrators (Email/Password Auth) |
+| `Farmer` | Sellers listing crops (Mobile OTP Auth) |
+| `Trader` | Verified buyers placing bids (Mobile OTP Auth) |
+| `Crop` | Inventory listings linked to Farmers |
+| `Bid` | Negotiation records between Traders and Farmers |
+| `OTP` | Self-destructing secure tokens (MongoDB TTL) |
+| `Transaction` | Payment tracking for completed deals |
+| `MandiPrice` | Wholesale market prices from government APIs |
+| `Message` | Chat system with double polymorphic references |
+| `Notification` | Event-driven inbox system |
+| `Report` | Trust & Safety moderation workflow |
+| `Review` | Reputation rating system with compound index spam prevention |
+| `Scheme` | Government scheme directory for farmer awareness |
+| `AuditLog` | Platform activity logging for admin accountability |
+
+## 🔐 Middleware
+- **Auth Middleware (`protect`):** Validates JWT Bearer tokens on protected routes, attaches decoded user payload to `req.user`, and returns `401 Unauthorized` for missing or invalid tokens.
 
 ## 💻 Local Setup
 
